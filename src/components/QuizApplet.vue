@@ -70,12 +70,17 @@
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  
   .questionDisplay {
+    flex:1;
     display: flex;
     text-align: center;
     justify-content: center;
   }
-  
+
+  @media (max-width: 768px) {
+    .questionDisplay {
+      display: inline;
+    }
+  }
 </style>
   

@@ -35,7 +35,12 @@ export default {
   margin-top: 60px;
 }
 
+body {
+  background-color: #252525;
+}
+
 button {
+  flex:1;
   font-size: 20px;
   text-align: center;
   background-color: #0000002b;
@@ -47,7 +52,5 @@ button {
   padding: 15px;
 }
 
-body {
-  background-color: #252525;
-}
+
 </style>
