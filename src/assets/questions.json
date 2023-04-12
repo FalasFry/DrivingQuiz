@@ -1,0 +1,55 @@
+{
+    "questions": [
+      {
+        "question": "Vilken är den högsta tillåtna hastigheten på en 70-väg?",
+        "options": [
+          "80 km/h",
+          "90 km/h",
+          "100 km/h",
+          "110 km/h"
+        ],
+        "answer": "100 km/h"
+      },
+      {
+        "question": "Vilken typ av övergångsställe kräver att föraren måste stanna för fotgängare?",
+        "options": [
+          "Vanligt övergångsställe",
+          "Omarkerat övergångsställe",
+          "Cykelöverfart",
+          "Barnvagnsövergång"
+        ],
+        "answer": "Vanligt övergångsställe"
+      },
+      {
+        "question": "Vilken av följande handlingar är förbjuden för förare under färd?",
+        "options": [
+          "Använda mobiltelefon utan handsfree",
+          "Dricka alkoholhaltiga drycker",
+          "Röka i bilen",
+          "Alla ovanstående"
+        ],
+        "answer": "Alla ovanstående"
+      },
+      {
+        "question": "Vilken av följande signaler betyder att föraren vill svänga till vänster?",
+        "options": [
+          "Blinka med vänster blinkersignal",
+          "Blinka med höger blinkersignal",
+          "Sänka hastigheten",
+          "Trycka på tutan"
+        ],
+        "answer": "Blinka med vänster blinkersignal"
+      },
+      {
+        "question": "Vad är den minsta tillåtna däckprofildjupet på en personbil?",
+        "options": [
+          "1,0 mm",
+          "1,6 mm",
+          "2,0 mm",
+          "3,0 mm"
+        ],
+        "answer": "1,6 mm"
+      }
+    ]
+  }
+  
