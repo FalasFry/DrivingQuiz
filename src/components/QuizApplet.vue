@@ -15,6 +15,15 @@
                 <button @click="CheckAnswer(answer)">{{ answer }}</button>
             </div>
         </div>
+
+        <div v-if="isCompleated">
+          <h2>{{ wrongAnswers[resultDisplay].question }}</h2>
+          <h2>{{ "Rätt Svar: " +wrongAnswers[resultDisplay].answer }}</h2>
+          <h2>{{ "Du Valde: " +wrongAnswers[resultDisplay].picked }}</h2>
+          <button @click="ShowResult(false)">Visa Förgående</button>
+          <button @click="ShowResult(true)">Visa Nästa</button>
+        </div>
+
       </div>
     </div>
 </template>
@@ -31,17 +40,24 @@
           this.score = 0;
           this.Shuffle(this.jsonData);
           this.wrongAnswers = [];
+          this.resultDisplay = 0;
+          for(let i = 0; i < this.jsonData.length; i++){
+            this.Shuffle(this.jsonData[i].options);
+          }
 
           this.isStarted = true;
         },
         CheckAnswer:function(option){
             if(this.jsonData[this.curQuestion].answer === option){
-                console.log('CORRECT');
-                while(!this.isCompleated){
+                if(!this.isCompleated){
                   this.score+=1;
                 }
             }else{
-                console.log('WRONG');
+                this.wrongAnswers.push({
+                  "question": this.jsonData[this.curQuestion].question,
+                  "answer": this.jsonData[this.curQuestion].answer,
+                  "picked": option,
+                });
             }
             
             if(this.curQuestion < this.jsonData.length-1){
@@ -50,6 +66,18 @@
             else{
               this.isCompleated = true;
             }
+        },
+        ShowResult:function(upordown) {
+          if(upordown){
+            if(this.resultDisplay < this.wrongAnswers.length-1){
+              this.resultDisplay +=1;
+            }
+          }
+          else{
+            if(this.resultDisplay > 0){
+              this.resultDisplay -=1;
+            }
+          }
         },
         Shuffle:function(array) {
           for (var i = array.length - 1; i > 0; i--) {
@@ -68,7 +96,8 @@
             score: Number,
             isStarted: false,
             wrongAnswers: Array,
-            isCompleated: Boolean,
+            isCompleated: false,
+            resultDisplay: Number,
         }
       }
   }
