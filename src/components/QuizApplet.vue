@@ -37,13 +37,18 @@
         CheckAnswer:function(option){
             if(this.jsonData[this.curQuestion].answer === option){
                 console.log('CORRECT');
-                this.score+=1;
+                while(!this.isCompleated){
+                  this.score+=1;
+                }
             }else{
                 console.log('WRONG');
             }
             
             if(this.curQuestion < this.jsonData.length-1){
               this.curQuestion+=1;
+            }
+            else{
+              this.isCompleated = true;
             }
         },
         Shuffle:function(array) {
@@ -63,6 +68,7 @@
             score: Number,
             isStarted: false,
             wrongAnswers: Array,
+            isCompleated: Boolean,
         }
       }
   }
