@@ -69,6 +69,16 @@
           "1,0 promille"
         ],
         "answer": "0,2 promille"
+      },
+      {
+        "question":"Vad är högsta tillåtna hastighet på en 30-väg?",
+        "options":[
+          "40 km/h",
+          "50 km/h",
+          "60 km/h",
+          "30 km/h"
+        ],
+        "answer": "50 km/h"
       }
     ]
   }
