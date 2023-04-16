@@ -52,7 +52,7 @@
           this.curQuestion = 0;
           this.score = 0;
           this.Shuffle(this.jsonData);
-          this.jsonData.splice(2);
+          this.jsonData.splice(65);
           this.wrongAnswers = [];
           this.resultDisplay = 0;
           this.isCompleated = false;
