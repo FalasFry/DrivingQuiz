@@ -59,6 +59,16 @@
           "3,0 mm"
         ],
         "answer": "3,0 mm"
+      },
+      {
+        "question": "Vad är det högsta tillåtna alkoholhalten för en person som ska köra bil?",
+        "options": [
+          "0,1 promille",
+          "0,2 promille",
+          "0,5 promille",
+          "1,0 promille"
+        ],
+        "answer": "0,2 promille"
       }
     ]
   }
