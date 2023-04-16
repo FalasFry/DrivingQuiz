@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Welcome To the practice driving quiz</h2>
     <QuizApp/>
   </div>
 </template>
@@ -31,7 +30,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #7592af;
+  justify-content: center;
+  color: #3d3d3d;
   margin-top: 60px;
 }
 
@@ -40,16 +40,16 @@ body {
 }
 
 button {
-  flex:1;
   font-size: 20px;
   text-align: center;
-  background-color: #0000002b;
+  background-color: #c4c4c45e;
   border: 10px;
   border-radius: 10px;
   margin: 5px;
-  color: #7592af;
+  color: #252525;
   box-shadow: 5px;
   padding: 15px;
+  text-decoration: none;
 }
 
 
