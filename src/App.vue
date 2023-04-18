@@ -32,7 +32,6 @@ export default {
   text-align: center;
   justify-content: center;
   color: #3d3d3d;
-  margin-top: 60px;
 }
 
 body {

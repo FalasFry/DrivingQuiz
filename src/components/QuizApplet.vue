@@ -4,20 +4,24 @@
 
       <div v-if="isStarted" class="QuizGame">
         
-        
         <div v-if="!isCompleated" class="questionPanel">
           <h1>{{ jsonData[curQuestion].question }}</h1>
           <h2 v-if="!isCompleated">{{ "Current Question: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
               <div v-for="(answer, index) in jsonData[curQuestion].options" :key="index">
-                  <button class="answerBtn" @click="CheckAnswer(answer)">{{ answer }}</button>
+                  <!-- <button class="answerBtn" @click="CheckAnswer(answer)">{{ answer }}</button> -->
+
+                  <label :class="[{'selected': selectedAnswer === answer}, 'answerLabel']">
+                    <input type="radio" class="answerInput" :value="answer" v-model="selectedAnswer">
+                    {{ answer }}
+                  </label>
               </div>
           </div>
+          <button @click="CheckAnswer(selectedAnswer)">Next</button>
         </div>
-
-
+        
         <div v-if="isCompleated">
-          <div class="resultsPanel">
+          <div v-if="wrongAnswers.length > 0" class="resultsPanel">
             <h1>Dina Resultat</h1>
             <h4> Rätta Svar: {{ score }} / {{ jsonData.length }} </h4>
             <h2>{{ wrongAnswers[resultDisplay].question }}</h2>
@@ -25,6 +29,9 @@
             <h2 class="urPick">{{ "Du Svarade: " +wrongAnswers[resultDisplay].picked }}</h2>
             <button @click="ShowResult(false)">Visa Förgående</button>
             <button @click="ShowResult(true)">Visa Nästa</button>
+          </div>
+          <div v-else>
+            <h1>Grattis Alla Rätt!</h1>
           </div>
         </div>
 
@@ -45,6 +52,7 @@
           this.curQuestion = 0;
           this.score = 0;
           this.Shuffle(this.jsonData);
+          this.jsonData.splice(65);
           this.wrongAnswers = [];
           this.resultDisplay = 0;
           this.isCompleated = false;
@@ -55,24 +63,24 @@
           this.isStarted = true;
         },
         CheckAnswer:function(option){
-            if(this.jsonData[this.curQuestion].answer === option){
-                if(!this.isCompleated){
-                  this.score+=1;
-                }
-            }else{
-                this.wrongAnswers.push({
-                  "question": this.jsonData[this.curQuestion].question,
-                  "answer": this.jsonData[this.curQuestion].answer,
-                  "picked": option,
-                });
-            }
-            
-            if(this.curQuestion < this.jsonData.length-1){
-              this.curQuestion+=1;
-            }
-            else{
-              this.isCompleated = true;
-            }
+          if(this.jsonData[this.curQuestion].answer === option){
+              if(!this.isCompleated){
+                this.score+=1;
+              }
+          }else{
+              this.wrongAnswers.push({
+                "question": this.jsonData[this.curQuestion].question,
+                "answer": this.jsonData[this.curQuestion].answer,
+                "picked": option,
+              });
+          }
+          if(this.curQuestion < this.jsonData.length-1){
+            this.curQuestion+=1;
+          }
+          else{
+            this.isCompleated = true;
+          }
+          this.selectedAnswer = null;
         },
         ShowResult:function(upordown) {
           if(upordown){
@@ -108,8 +116,9 @@
             wrongAnswers: Array,
             isCompleated: false,
             resultDisplay: Number,
+            selectedAnswer: null,
         }
-      }
+      },
   }
 </script>
   
@@ -120,16 +129,18 @@
     display: inline;
   }
 
-
   .endBtn {
     justify-content: center;
   }
 
   .questionDisplay {
-    flex:1;
-    display: flex;
+    display: grid;
     text-align: center;
+    align-items: center;
     justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    line-height: 200%;
   }
 
   .questionPanel {
@@ -139,12 +150,11 @@
     text-align: center;
     background-color: #aaa;
     width: 900px;
-    height: 240px;
-    margin: 1%;
-    padding: 1%;
+    height: 100%;
     border-style: double;
     border-color: #252525;
     border-radius: 10%;
+    padding: 1%;
   }
 
   .resultsPanel {
@@ -162,11 +172,25 @@
     border-radius: 10%;
   }
 
-
-  .answerBtn {
-    width: 210px;
-    height: 60px;
-    padding: 0;
+  .answerLabel {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 70%;
+    height: 70px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  .answerLabel.selected {
+    background-color: green;
+    border-color: green;
+  }
+  .answerInput {
+    display: none;
   }
 
   .correctAns {
@@ -175,13 +199,35 @@
   }
 
   .urPick {
-    color: lightsalmon;
-    background-color: rgb(233, 42, 42);
+    color: rgb(247, 181, 181);
+    background-color: rgb(182, 14, 14);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     .questionDisplay {
-      display: inline;
+      line-height: 150%;
+    }
+
+    .resultsPanel {
+      width: 100%;
+      height: 100%;
+    }
+
+    .questionPanel {
+      width: 100%;
+      height: 100%;
+    }
+    h1 {
+      font-size: 130%;
+    }
+    h2 {
+      font-size: 110%;
+    }
+  }
+
+  @media (max-height: 450px) {
+    .questionDisplay {
+      line-height: 150%;
     }
 
     .resultsPanel {

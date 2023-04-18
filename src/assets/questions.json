@@ -59,6 +59,26 @@
           "3,0 mm"
         ],
         "answer": "3,0 mm"
+      },
+      {
+        "question": "Vad är det högsta tillåtna alkoholhalten för en person som ska köra bil?",
+        "options": [
+          "0,1 promille",
+          "0,2 promille",
+          "0,5 promille",
+          "1,0 promille"
+        ],
+        "answer": "0,2 promille"
+      },
+      {
+        "question":"Vad är högsta tillåtna hastighet på en 30-väg?",
+        "options":[
+          "40 km/h",
+          "50 km/h",
+          "60 km/h",
+          "30 km/h"
+        ],
+        "answer": "50 km/h"
       }
     ]
   }
