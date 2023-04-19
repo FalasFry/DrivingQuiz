@@ -254,7 +254,6 @@
   @media screen and (display: standalone) {
     header {
       height: 100px;      
-      position: sticky;
     }
   }
 
