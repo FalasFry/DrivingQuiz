@@ -1,5 +1,8 @@
 <template>
     <div>
+      <header>
+        <h1>Lär Dig Teori</h1>
+      </header>
       <button v-if="!isStarted" @click="StartQuiz">Starta Quiz</button>
 
       <div v-if="isStarted" class="QuizGame">
@@ -148,7 +151,7 @@
     flex: 1;
     justify-content: center;
     text-align: center;
-    background-color: #aaa;
+    background-color: whitesmoke;
     width: 900px;
     height: 100%;
     border-style: double;
@@ -162,7 +165,7 @@
     flex: 1;
     justify-content: center;
     text-align: center;
-    background-color: #aaa;
+    background-color: whitesmoke;
     width: 755px;
     height: 380px;
     margin: 1%;
@@ -186,8 +189,8 @@
     align-items: center;
   }
   .answerLabel.selected {
-    background-color: green;
-    border-color: green;
+    background-color: rgb(158, 158, 158);
+    border-color: rgb(102, 102, 102);
   }
   .answerInput {
     display: none;
@@ -244,6 +247,13 @@
     }
     h2 {
       font-size: 110%;
+    }
+  }
+
+
+  @media screen and (display: standalone) {
+    header {
+      height: 88px;
     }
   }
 

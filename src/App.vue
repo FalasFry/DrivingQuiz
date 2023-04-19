@@ -35,13 +35,13 @@ export default {
 }
 
 body {
-  background-color: #252525;
+  background-color: #ccc;
 }
 
 button {
   font-size: 20px;
   text-align: center;
-  background-color: #c4c4c45e;
+  background-color: #7474745e;
   border: 10px;
   border-radius: 10px;
   margin: 5px;
