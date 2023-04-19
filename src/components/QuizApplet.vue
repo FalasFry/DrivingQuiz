@@ -1,8 +1,9 @@
 <template>
     <div>
-      <header v-if="!isStarted">
-        <h1>Lär Dig Teori</h1>
+      <header>
+        <h1>  </h1>
       </header>
+      <h1 v-if="!isStarted">Lär Dig Teori!</h1>
       <button v-if="!isStarted" @click="StartQuiz">Starta Quiz</button>
 
       <div v-if="isStarted" class="QuizGame">
@@ -127,10 +128,6 @@
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-  header {
-    position: sticky;
-  }
   .quizGame {
     display: inline;
   }
@@ -256,7 +253,7 @@
 
   @media screen and (display: standalone) {
     header {
-      padding-top: 50px;
+      height: 100px;      
       position: sticky;
     }
   }
