@@ -51,7 +51,7 @@ button {
   text-decoration: none;
 }
 
-@media (display: standalone) {
+@media screen and (display: standalone) {
   #app {
     -webkit-tap-highlight-color: transparent;
   }
