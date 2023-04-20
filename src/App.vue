@@ -51,5 +51,15 @@ button {
   text-decoration: none;
 }
 
+@media (display: standalone) {
+  #app {
+    -webkit-tap-highlight-color: transparent;
+  }
+  header {
+    height: 100px;      
+    padding-bottom: 100px;
+  }
+}
+
 
 </style>
