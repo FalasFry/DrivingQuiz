@@ -249,7 +249,10 @@
   }
 
 
-  @media all and (display: standalone) {
+  @media (display: standalone) {
+    #app {
+      -webkit-tap-highlight-color: transparent;
+    }
     header {
       height: 100px;      
       padding-bottom: 100px;
