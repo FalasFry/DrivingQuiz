@@ -1,7 +1,7 @@
 <template>
     <div>
       <header>
-        <h1> Header </h1>
+        <h1>     </h1>
       </header>
       <h1 v-if="!isStarted">Lär Dig Teori!</h1>
       <button v-if="!isStarted" @click="StartQuiz">Starta Quiz</button>
