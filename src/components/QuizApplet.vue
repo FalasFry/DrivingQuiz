@@ -1,7 +1,7 @@
 <template>
     <div>
       <header>
-        <h1>  </h1>
+        <h1> Header </h1>
       </header>
       <h1 v-if="!isStarted">Lär Dig Teori!</h1>
       <button v-if="!isStarted" @click="StartQuiz">Starta Quiz</button>
@@ -13,8 +13,6 @@
           <h2 v-if="!isCompleated">{{ "Current Question: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
               <div v-for="(answer, index) in jsonData[curQuestion].options" :key="index">
-                  <!-- <button class="answerBtn" @click="CheckAnswer(answer)">{{ answer }}</button> -->
-
                   <label :class="[{'selected': selectedAnswer === answer}, 'answerLabel']">
                     <input type="radio" class="answerInput" :value="answer" v-model="selectedAnswer">
                     {{ answer }}
@@ -189,7 +187,7 @@
     align-items: center;
   }
   .answerLabel.selected {
-    background-color: rgb(158, 158, 158);
+    background-color: rgb(199, 199, 199);
     border-color: rgb(102, 102, 102);
   }
   .answerInput {
@@ -206,7 +204,7 @@
     background-color: rgb(182, 14, 14);
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 950px) {
     .questionDisplay {
       line-height: 150%;
     }
@@ -251,9 +249,10 @@
   }
 
 
-  @media screen and (display: standalone) {
+  @media all and (display: standalone) {
     header {
       height: 100px;      
+      padding-bottom: 100px;
     }
   }
 
