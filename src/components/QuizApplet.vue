@@ -7,7 +7,17 @@
         
         <div v-if="!isCompleated" class="questionPanel">
           <h1>{{ jsonData[curQuestion].question }}</h1>
-          <img :src="image">
+
+
+          <div v-for="(image) in images" :key="image.index">
+            <div class="image-container">
+              <div class="imageDisplay">
+                <!-- <img :src="image" class="fit-image"> -->
+                  <img :src="image.base64" class="fit-image">
+              </div>
+            </div>
+        </div>
+
           <h2 v-if="!isCompleated">{{ "Current Question: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
               <div v-for="(answer, index) in jsonData[curQuestion].options" :key="index">
@@ -43,7 +53,6 @@
   
 <script>
   import jsonFile from '../assets/questions.json'
-  import image from '../assets/images/parkering-2timmar-8-18-pskiva.jpg'
   
   export default {
       name: "QuizApp",
@@ -56,18 +65,18 @@
           this.jsonData.splice(65);
           this.wrongAnswers = [];
           this.hasImageArray = [];
+          this.images = [];
           this.resultDisplay = 0;
           this.isCompleated = false;
           for(let i = 0; i < this.jsonData.length; i++){
             this.Shuffle(this.jsonData[i].options);
             if(this.jsonData[i].img){
-              this.hasImageArray[i] = true;
-            }
-            if(image){
-              this.image = image;
+              this.hasImageArray.push({
+                "index": i,
+                "src": this.jsonData[i].img,
+              })
             }
           }
-          console.log(this.hasImageArray);
           this.isStarted = true;
         },
         CheckAnswer:function(option) {
@@ -125,7 +134,7 @@
             resultDisplay: Number,
             selectedAnswer: null,
             hasImageArray: Array,
-            image: null,
+            images: Array,            
         }
       },
   }
@@ -153,8 +162,6 @@
 
   .questionPanel {
     display: inline-block;
-    flex: 1;
-    justify-content: center;
     text-align: center;
     background-color: whitesmoke;
     width: 900px;
@@ -163,6 +170,29 @@
     border-color: #252525;
     border-radius: 10%;
     padding: 1%;
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .imageDisplay {
+    background-color: black;
+    padding: 2%;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    height: auto;
+    left: 50%;
+  }
+
+  .fit-image {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .resultsPanel {
