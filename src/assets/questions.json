@@ -79,6 +79,17 @@
           "30 km/h"
         ],
         "answer": "50 km/h"
+      },
+      {
+        "question":"Hur länge får du parkera klockan 17 på en tisdag här?",
+        "options":[
+          "2 timmar",
+          "Får inte parkera",
+          "1 timme",
+          "Tills klockan 10 dagen efter"
+        ],
+        "answer": "Tills klockan 10 dagen efter",
+        "img":"/../assets/images/parkering-2timmar-8-18-pskiva.jpg"
       }
     ]
   }

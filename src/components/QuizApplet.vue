@@ -7,6 +7,7 @@
         
         <div v-if="!isCompleated" class="questionPanel">
           <h1>{{ jsonData[curQuestion].question }}</h1>
+          <img :src="image">
           <h2 v-if="!isCompleated">{{ "Current Question: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
               <div v-for="(answer, index) in jsonData[curQuestion].options" :key="index">
@@ -42,6 +43,7 @@
   
 <script>
   import jsonFile from '../assets/questions.json'
+  import image from '../assets/images/parkering-2timmar-8-18-pskiva.jpg'
   
   export default {
       name: "QuizApp",
@@ -53,15 +55,22 @@
           this.Shuffle(this.jsonData);
           this.jsonData.splice(65);
           this.wrongAnswers = [];
+          this.hasImageArray = [];
           this.resultDisplay = 0;
           this.isCompleated = false;
           for(let i = 0; i < this.jsonData.length; i++){
             this.Shuffle(this.jsonData[i].options);
+            if(this.jsonData[i].img){
+              this.hasImageArray[i] = true;
+            }
+            if(image){
+              this.image = image;
+            }
           }
-
+          console.log(this.hasImageArray);
           this.isStarted = true;
         },
-        CheckAnswer:function(option){
+        CheckAnswer:function(option) {
           if(this.jsonData[this.curQuestion].answer === option){
               if(!this.isCompleated){
                 this.score+=1;
@@ -104,7 +113,6 @@
             array[j] = temp;
           }
         }
-
       },
       data() {
         return{
@@ -116,6 +124,8 @@
             isCompleated: false,
             resultDisplay: Number,
             selectedAnswer: null,
+            hasImageArray: Array,
+            image: null,
         }
       },
   }
