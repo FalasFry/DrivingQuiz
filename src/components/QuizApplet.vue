@@ -9,11 +9,11 @@
           <h1>{{ jsonData[curQuestion].question }}</h1>
 
 
-          <div v-for="(image) in images" :key="image.index">
+          <div v-for="(image) in hasImageArray" :key="image.index">
             <div class="image-container">
               <div class="imageDisplay">
                 <!-- <img :src="image" class="fit-image"> -->
-                  <img :src="image.base64" class="fit-image">
+                  <img :src="image.img" class="fit-image">
               </div>
             </div>
         </div>
@@ -65,7 +65,6 @@
           this.jsonData.splice(65);
           this.wrongAnswers = [];
           this.hasImageArray = [];
-          this.images = [];
           this.resultDisplay = 0;
           this.isCompleated = false;
           for(let i = 0; i < this.jsonData.length; i++){
@@ -134,7 +133,6 @@
             resultDisplay: Number,
             selectedAnswer: null,
             hasImageArray: Array,
-            images: Array,            
         }
       },
   }
