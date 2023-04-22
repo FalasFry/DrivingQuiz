@@ -79,6 +79,9 @@
               if(this.images[i].path === this.jsonData[j].img){
                 this.jsonData[j].src = this.images[i].src;
               }
+              else if(this.images[i].path === "img"){
+                this.jsonData[j].src = this.images[i].src;
+              }
             }
           }
           console.log(this.images);
