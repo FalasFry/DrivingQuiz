@@ -8,15 +8,11 @@
         <div v-if="!isCompleated" class="questionPanel">
           <h1>{{ jsonData[curQuestion].question }}</h1>
 
-
-          <div v-for="(image) in hasImageArray" :key="image.index">
-            <div class="image-container">
-              <div class="imageDisplay">
-                <!-- <img :src="image" class="fit-image"> -->
-                  <img :src="image.img" class="fit-image">
-              </div>
+          <div  class="image-container">
+            <div class="imageDisplay">
+              <img v-if="jsonData[curQuestion].src" :src="jsonData[curQuestion].src" class="fit-image">
             </div>
-        </div>
+          </div>
 
           <h2 v-if="!isCompleated">{{ "Current Question: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
@@ -35,6 +31,13 @@
             <h1>Dina Resultat</h1>
             <h4> Rätta Svar: {{ score }} / {{ jsonData.length }} </h4>
             <h2>{{ wrongAnswers[resultDisplay].question }}</h2>
+
+            <div  class="image-container">
+              <div class="imageDisplay">
+                <img v-if="wrongAnswers[resultDisplay].src" :src="wrongAnswers[resultDisplay].src" class="fit-image">
+              </div>
+            </div>
+
             <h2 class="correctAns">{{ "Rätt Svar: " +wrongAnswers[resultDisplay].answer }}</h2>
             <h2 class="urPick">{{ "Du Svarade: " +wrongAnswers[resultDisplay].picked }}</h2>
             <button @click="ShowResult(false)">Visa Förgående</button>
@@ -61,19 +64,21 @@
           this.jsonData = jsonFile.questions;
           this.curQuestion = 0;
           this.score = 0;
-          this.Shuffle(this.jsonData);
           this.jsonData.splice(65);
+          this.Shuffle(this.jsonData);
           this.wrongAnswers = [];
-          this.hasImageArray = [];
+          this.images = [];
           this.resultDisplay = 0;
           this.isCompleated = false;
           for(let i = 0; i < this.jsonData.length; i++){
             this.Shuffle(this.jsonData[i].options);
-            if(this.jsonData[i].img){
-              this.hasImageArray.push({
-                "index": i,
-                "src": this.jsonData[i].img,
-              })
+          }
+          this.ImportImages();
+          for(let i = 0; i < this.images.length; i++){
+            for(let j = 0; j < this.jsonData.length;j++){
+              if(this.images[i].path === this.jsonData[j].img){
+                this.jsonData[j].src = this.images[i].src;
+              }
             }
           }
           this.isStarted = true;
@@ -88,7 +93,9 @@
                 "question": this.jsonData[this.curQuestion].question,
                 "answer": this.jsonData[this.curQuestion].answer,
                 "picked": option,
+                "src": this.jsonData[this.curQuestion].src,
               });
+
           }
           if(this.curQuestion < this.jsonData.length-1){
             this.curQuestion+=1;
@@ -113,6 +120,17 @@
         EndQuiz:function() {
           this.isStarted = false;
         },
+        ImportImages:function() {
+          const files = require.context('@/assets/images', false, /\.jpg$/);
+          files.keys().forEach(key => {
+            let path = files(key).split('/')[2].split('.')[0];
+            this.images.push({
+              "src": files(key),
+              "path": path,
+            });
+          });
+        },
+
         Shuffle:function(array) {
           for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
@@ -132,7 +150,7 @@
             isCompleated: false,
             resultDisplay: Number,
             selectedAnswer: null,
-            hasImageArray: Array,
+            images: [],
         }
       },
   }
@@ -176,13 +194,11 @@
   }
 
   .imageDisplay {
-    background-color: black;
+    background-color: #bdbdbd;
     padding: 2%;
-    align-items: center;
-    justify-content: center;
     width: 800px;
-    height: auto;
-    left: 50%;
+    height: 450px;
+    border-radius: 10%;
   }
 
   .fit-image {
@@ -191,6 +207,8 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border: 1%;
+    border-radius: 10%;
   }
 
   .resultsPanel {
@@ -200,7 +218,7 @@
     text-align: center;
     background-color: whitesmoke;
     width: 755px;
-    height: 380px;
+    height: 100%;
     margin: 1%;
     padding: 1%;
     border-style: double;
@@ -212,14 +230,12 @@
     display: inline-block;
     margin: 10px;
     padding: 10px;
-    border: 2px solid black;
+    border: 2px solid #252525;
     border-radius: 10px;
     cursor: pointer;
     width: 70%;
     height: 70px;
-    justify-content: center;
     text-align: center;
-    align-items: center;
   }
   .answerLabel.selected {
     background-color: rgb(199, 199, 199);
@@ -239,7 +255,7 @@
     background-color: rgb(182, 14, 14);
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 450px) {
     .questionDisplay {
       line-height: 150%;
     }
@@ -253,33 +269,61 @@
       width: 100%;
       height: 100%;
     }
+
+    .image-container {
+      padding-left: 3%;
+      padding-right: 3%;
+    }
+    .imageDisplay {
+      padding: 2px;
+      width: 100%;
+      height: calc(100vw / 1.7777778)
+    }
+
+    .answerLabel {
+      width: 70%;
+      height: calc(70vw / 3);
+      line-height: 100%;
+      text-align: center;
+      padding-bottom: -50vh;
+    }
+
     h1 {
-      font-size: 130%;
+      font-size: 4.7vw;
+      padding-left: 5%;
+      padding-right: 5%;
     }
     h2 {
-      font-size: 110%;
+      font-size: 4.2vw;
     }
   }
 
-  @media (max-height: 450px) {
+  @media (max-height: 820px) {
     .questionDisplay {
       line-height: 150%;
     }
 
-    .resultsPanel {
-      width: 100%;
-      height: 100%;
-    }
-
     .questionPanel {
       width: 100%;
-      height: 100%;
     }
+
+    .resultsPanel {
+      width: 100%;
+    }
+
+    .imageDisplay {
+      padding: 2px;
+      height: calc(30vh / 0.5625);
+      width: 70%;
+    }
+
     h1 {
-      font-size: 130%;
+      font-size: 6vh;
+      padding-left: 5%;
+      padding-right: 5%;
     }
     h2 {
-      font-size: 110%;
+      font-size: 5vh;
     }
   }
 </style>
