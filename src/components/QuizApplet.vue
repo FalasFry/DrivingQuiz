@@ -81,6 +81,7 @@
               }
             }
           }
+          console.log(this.jsonData);
           this.isStarted = true;
         },
         CheckAnswer:function(option) {
