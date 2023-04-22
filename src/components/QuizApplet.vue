@@ -81,6 +81,7 @@
               }
               else if(this.images[i].path === "img"){
                 this.jsonData[j].src = this.images[i].src;
+                break;
               }
             }
           }
