@@ -81,6 +81,7 @@
               }
             }
           }
+          console.log(this.images);
           console.log(this.jsonData);
           this.isStarted = true;
         },
