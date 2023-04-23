@@ -14,7 +14,7 @@
             </div>
           </div>
 
-          <h2 v-if="!isCompleated">{{ "Current Question: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
+          <h2 v-if="!isCompleated">{{ "Fråga nummer: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
               <div v-for="(answer, index) in jsonData[curQuestion].options" :key="index">
                   <label :class="[{'selected': selectedAnswer === answer}, 'answerLabel']">
@@ -23,7 +23,7 @@
                   </label>
               </div>
           </div>
-          <button @click="CheckAnswer(selectedAnswer)">Next</button>
+          <button v-if="selectedAnswer" @click="CheckAnswer(selectedAnswer)">Nästa Fråga</button>
         </div>
         
         <div v-if="isCompleated">
@@ -61,6 +61,7 @@
       name: "QuizApp",
       methods: {
         StartQuiz:function(){
+          this.selectedAnswer = null;
           this.jsonData = jsonFile.questions;
           this.curQuestion = 0;
           this.score = 0;
@@ -200,7 +201,7 @@
   }
 
   .imageDisplay {
-    background-color: #bdbdbd;
+    background-color: whitesmoke;
     padding: 2%;
     width: 800px;
     height: 450px;
