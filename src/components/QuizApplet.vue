@@ -75,18 +75,16 @@
           }
           this.ImportImages();
           for(let i = 0; i < this.images.length; i++){
+            
             for(let j = 0; j < this.jsonData.length;j++){
               if(this.images[i].path === this.jsonData[j].img){
                 this.jsonData[j].src = this.images[i].src;
               }
-              else if(this.images[i].path === "img"){
+              else if(this.images[i].builtPath === this.jsonData[j].img){
                 this.jsonData[j].src = this.images[i].src;
-                break;
               }
             }
           }
-          console.log(this.images);
-          console.log(this.jsonData);
           this.isStarted = true;
         },
         CheckAnswer:function(option) {
@@ -130,9 +128,11 @@
           const files = require.context('@/assets/images', false, /\.jpg$/);
           files.keys().forEach(key => {
             let path = files(key).split('/')[2].split('.')[0];
+            let builtPath = files(key).split('/')[3].split('.')[0];
             this.images.push({
               "src": files(key),
               "path": path,
+              "builtPath": builtPath,
             });
           });
         },
