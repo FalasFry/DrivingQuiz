@@ -312,7 +312,7 @@
     }
   }
 
-  @media (max-height: 820px) {
+  @media (max-height: 820px) and (orientation:landscape) {
     .questionDisplay {
       line-height: 150%;
     }
