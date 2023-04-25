@@ -6,13 +6,14 @@
       <div v-if="isStarted" class="QuizGame">
         
         <div v-if="!isCompleated" class="questionPanel">
-          <h1>{{ jsonData[curQuestion].question }}</h1>
 
           <div  class="image-container">
             <div class="imageDisplay">
               <img v-if="jsonData[curQuestion].src" :src="jsonData[curQuestion].src" class="fit-image">
             </div>
           </div>
+
+          <h1>{{ jsonData[curQuestion].question }}</h1>
 
           <h2 v-if="!isCompleated">{{ "Fråga nummer: " +(curQuestion+1) +" / " +jsonData.length }}</h2>
           <div class="questionDisplay">
@@ -24,13 +25,12 @@
               </div>
           </div>
           <button v-if="selectedAnswer" @click="CheckAnswer(selectedAnswer)">Nästa Fråga</button>
+          <button v-else  class="unclickable">Nästa Fråga</button>
         </div>
         
         <div v-if="isCompleated">
           <div v-if="wrongAnswers.length > 0" class="resultsPanel">
             <h1>Dina Resultat</h1>
-            <h4> Rätta Svar: {{ score }} / {{ jsonData.length }} </h4>
-            <h2>{{ wrongAnswers[resultDisplay].question }}</h2>
 
             <div  class="image-container">
               <div class="imageDisplay">
@@ -38,6 +38,8 @@
               </div>
             </div>
 
+            <h4> Rätta Svar: {{ score }} / {{ jsonData.length }} </h4>
+            <h2>{{ wrongAnswers[resultDisplay].question }}</h2>
             <h2 class="correctAns">{{ "Rätt Svar: " +wrongAnswers[resultDisplay].answer }}</h2>
             <h2 class="urPick">{{ "Du Svarade: " +wrongAnswers[resultDisplay].picked }}</h2>
             <button @click="ShowResult(false)">Visa Förgående</button>
@@ -130,6 +132,7 @@
           files.keys().forEach(key => {
             let path = files(key).split('/')[2].split('.')[0];
             let builtPath = files(key).split('/')[3].split('.')[0];
+            //let builtPath = 0;
             this.images.push({
               "src": files(key),
               "path": path,
@@ -193,6 +196,10 @@
     border-color: #252525;
     border-radius: 10%;
     padding: 1%;
+  }
+
+  .unclickable {
+    opacity: 40%;
   }
 
   .image-container {
